@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <div id="deaths"></div>
+
+        <script>
+            catchDeaths().catch(error => 
+            {
+                console.error(error);
+            });
+
+            async function catchDeaths()
+            {
+                /**Variables defined with const behave like let variables, 
+                 * except they cannot be reassigned*/
+                const response = await fetch('deaths.json');
+                const data = await response.json();
+
+                par = document.getElementById('deaths');
+
+                for(const death of data)
+                {
+                    listItem = document.createElement('p');
+                    listItem.appendChild(
+                        document.createElement('B')
+                    ).textContent = death.name + ' ';
+                    listItem.appendChild(
+                        document.createElement('B')
+                    ).textContent = death.house + ' ';
+                    listItem.appendChild(
+                        document.createElement("I")
+                    ).textContent = death.book;
+
+                    par.appendChild(listItem);
+                }
+            }
+        </script>
+    </body>
+</html>
